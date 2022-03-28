@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <text>hello world</text>
+    <!-- 获取后端py文件当中的bbb变量 -->
+    {{bbb}}
+    <!-- 单独获取字典bbb中的name的值 -->
+    {{bbb['name']}}
+    {{bbb.name}}
+    <br>
+    ccc:{{bbb.mylist}}
+    <br>
+    <!-- |之后的就是过滤器的名称 -->
+    <!-- 列表也可进行计算 -->
+    ddd:{{bbb.mylist[1] + bbb.mylist[3]}}
+    <br>
+    <!-- 将字符串大写 -->
+    {{'hello world' | upper}}
+    <br>
+    <!-- 将首字母大写 -->
+    {{'hello world' | title}}
+    <br>
+    <!-- 将字符串进行替换 -->
+    {{'hello world' | replace('hello','hi')}}
+    <br>
+    <!-- 自定义过滤器名称写在|之后 -->
+    {{bbb.mylist | eee}}
+</body>
+
+</html>

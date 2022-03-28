@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="" method='post'>
+        <label>用户名：</label><input type="text" name="username"> <br>
+        <label>密码：</label><input type="password" name="password"> <br>
+        <label>确认密码：</label><input type="password" name="password2"> <br>
+        <input type="submit" value="提交"> <br>
+        <!-- 使用遍历获取flash的message -->
+        <!-- 遍历函数get_flashed_message中获取到的值 -->
+        {%for message in get_flashed_messages() %}
+        {{ message }}
+        {%endfor%}
+    </form>
+    <hr>
+    <form action="" method="POST">
+        <!-- 开启csrf,使用WTF表单验证时需要开启 -->
+        {{form.csrf_token()}}
+        <!-- 获取后端中的form表单中的username中的label，{{form.username}}用于获取输入框 -->
+        {{ form.username.label }}{{ form.username }} <br>
+        {{ form.password.label }}{{ form.password }} <br>
+        {{ form.password2.label }}{{ form.password2 }} <br>
+        {{ form.submit }}
+    </form>
+</body>
+
+</html>
