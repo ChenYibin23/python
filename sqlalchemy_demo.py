@@ -25,9 +25,8 @@ db = SQLAlchemy(app)
 
 # 数据库的模型，需要继承db.Model
 class Roles(db.Model):
-    # 定义表名
-    __tablename__ = 'Roles'
-
+    # 定义表名（创建表时生成的表名）
+    __tablename__ = 'Role'
     # 定义字段
     # db.Column表示是一个字段
     # primary_key设置id为主键
@@ -35,24 +34,29 @@ class Roles(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(16),unique=True)
 
+
+
 class User(db.Model):
-    # 定义表名
-    __tablename__ = 'User'
+    # 定义表名（创建表时生成的表名）
+    __tablename__ = 'users'
     user_id = db.Column(db.Integer,primary_key=True)
     user_name = db.Column(db.String(16),unique=True)
-    # db.ForeignKey('roles.id')  表示是外键，表名.id  (此处的表名是其他表的)
-    # 设置外键之后与外键关联的原列表的主键行不可删除
-    role_id = db.Column(db.Integer,db.ForeignKey('Roles.id'))
 
-
-@app.route('/')
-def index():
-    return 'hello world'
 
 
 if __name__ == '__main__':
+
     # 先删除表，保证数据库中没有过多的其他表
     db.drop_all()
     # 创建表
     db.create_all()
+    # 使用db语句进行表中元素的插入
+    aaa = Roles(name = 'a')
+    db.session.add(aaa)
+    db.session.commit()
+    aaa = User(user_name = 'aaasda')
+    db.session.add(aaa)
+    db.session.commit()
     app.run(debug=True)
+
+
