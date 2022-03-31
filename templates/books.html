@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form method='POST'>
+        {{book_form.csrf_token()}}
+        {{book_form.author_name.label}}{{book_form.author_name}} <br>
+        {{book_form.book_name.label}}{{book_form.book_name}} <br>
+        {{book_form.submit}}
+        {%for message in get_flashed_messages()%}
+        {{message}}
+        {%endfor%}
+    </form>
+    <hr>
+    <!-- 先遍历作者，再在作者里遍历书籍 -->
+    <ul>
+        {%for key in users%}
+        <li>{{ key.name }}<a href="{{ url_for('delete_author',author_id=key.id) }}">删除</a></li>
+        <ul>
+            {%for book in key.books%}
+            <!-- 将所删除的书籍的id返回到路由中的route_id中 -->
+            <li>{{book.name}}<a href="{{ url_for('delete',route_id=book.id) }}">删除</a></li>
+            <!-- 当没有数据进行遍历是会显示‘无’ -->
+            {%else%}
+            <li>无</li>
+            {%endfor%}
+        </ul>
+        {%endfor%}
+    </ul>
+</body>
+
+</html>

@@ -74,7 +74,7 @@ def login():
 
 
 @app.route('/index', methods=['GET', 'POST'])
-def index():
+def inde():
     if request.method == 'GET':
         url_form = LoginForm()
         return render_template('request.html', form=url_form)
