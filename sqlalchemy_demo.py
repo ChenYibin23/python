@@ -21,6 +21,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 # 数据库的模型，需要继承db.Model
+
+
 class Role(db.Model):
     # 定义表名（创建表时生成的表名）
     __tablename__ = 'roles'
@@ -28,15 +30,17 @@ class Role(db.Model):
     # db.Column表示是一个字段
     # primary_key设置id为主键
     # unique设置name只能是唯一值
-    id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(16),unique=True)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(16), unique=True)
+
 
 class User(db.Model):
     # 定义表名（创建表时生成的表名）
     __tablename__ = 'users'
-    user_id = db.Column(db.Integer,primary_key=True)
-    user_name = db.Column(db.String(16),unique=True)
+    user_id = db.Column(db.Integer, primary_key=True)
+    user_name = db.Column(db.String(16), unique=True)
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+
 
 if __name__ == '__main__':
     # 先删除表，保证数据库中没有过多的其他表
@@ -44,13 +48,11 @@ if __name__ == '__main__':
     # 创建表
     db.create_all()
     # 使用db语句进行表中元素的插入
-    aaa = Role(name = 'a')
+    aaa = Role(name='a')
     db.session.add(aaa)
     db.session.commit()
     # 此处的aaa为上面添加一行时的操作名
-    aaa = User(user_name = 'aaasda',role_id = aaa.id)
+    aaa = User(user_name='aaasda', role_id=aaa.id)
     db.session.add(aaa)
     db.session.commit()
     app.run(debug=True)
-
-

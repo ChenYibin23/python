@@ -1,9 +1,6 @@
 from pickle import TRUE
-import this
-from unicodedata import name
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from matplotlib.pyplot import text
 import pymysql
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
@@ -187,4 +184,4 @@ if __name__ == '__main__':
     bk5 = Book(name='随便打的介绍5', author_id=au3.id)
     db.session.add_all([bk1, bk2, bk3, bk4, bk5])
     db.session.commit()
-    app.run(debug=TRUE)
+    app.run(debug=TRUE, host='127.0.0.1', port=5000)
